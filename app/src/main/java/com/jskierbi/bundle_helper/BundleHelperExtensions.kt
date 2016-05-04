@@ -9,12 +9,13 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.util.Size
 import android.util.SizeF
+import org.parceler.Parcels
 import java.io.Serializable
 
 /**
  * Created by q on 04/05/16.
  */
-inline fun <reified T : Any> Activity.startActivity(vararg extras: Pair<String, Any> = arrayOf()) {
+inline fun <reified T : Any> Activity.startActivity(vararg extras: Pair<String, Any?> = emptyArray()) {
   val intent = Intent(this, T::class.java)
   if (extras.isNotEmpty()) {
     val bundle = Bundle()
@@ -40,7 +41,8 @@ inline fun <reified T : Any> Activity.startActivity(vararg extras: Pair<String, 
           Log.w("BundleHelperExtensionss.kt", "Warning: using Serializable for bundling value of class ${value.javaClass}")
           bundle.putSerializable(key, value)
         }
-        else -> throw IllegalArgumentException("Cannot put to bundle, unsupported type: ${value.javaClass}")
+        null -> null // poor mans null safety
+        else -> throw IllegalArgumentException("Cannot put to bundle, unsupported type: ${value?.javaClass}")
       }
     }
     intent.putExtras(bundle)
@@ -48,9 +50,16 @@ inline fun <reified T : Any> Activity.startActivity(vararg extras: Pair<String, 
   startActivity(intent)
 }
 
-inline fun <reified T : Any> Activity.lazyExtra(key: String) = lazy {
-  val extra = intent.extras.get(key)
+/** Lazy initialize with intent extra [key] */
+inline fun <reified T : Any?> Activity.lazyExtra(key: String) = lazy {
+  val extra = intent.extras?.get(key)
   extra as T
 }
 
+/** Lazy initialize with intent extra [key], using [op] to convert parcelable to resulting type */
+inline fun <reified T : Any?> Activity.lazyExtra(key: String, crossinline op: (Parcelable?) -> T) = lazy {
+  op(intent.extras?.getParcelable<Parcelable>(key))
+}
 
+fun Any.wrapParcel() = Parcels.wrap(this)
+fun <T> Parcelable?.unwrap() = Parcels.unwrap<T>(this)

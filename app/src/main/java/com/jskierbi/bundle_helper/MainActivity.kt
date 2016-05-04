@@ -11,9 +11,11 @@ class MainActivity : AppCompatActivity() {
 
     findViewById(R.id.btn_start_other)?.setOnClickListener {
       startActivity<OtherActivity>(
-          OtherActivity.EXTRA_BOOLEAN to true,
+          OtherActivity.EXTRA_BOOLEAN_OPTIONAL to true,
+          OtherActivity.EXTRA_STRING to "Oh, hello world!",
           OtherActivity.EXTRA_FLOAT to 1.12f,
-          OtherActivity.EXTRA_STRING to "Oh, hello world!"
+          OtherActivity.EXTRA_COMPLEX_PARAMETER to ComplexParameter().apply { a = "hello"; b = true }.wrapParcel(),
+          "other" to null
       )
     }
   }
