@@ -24,11 +24,6 @@ inline fun <reified T : Any?> Activity.lazyExtra(key: String) = lazy {
   intent.extras?.get(key) as T
 }
 
-/** Lazy initialize with intent extra [key], using [op] to convert parcelable to resulting type */
-inline fun <reified T : Any?> Activity.lazyExtra(key: String, crossinline op: (Parcelable?) -> T) = lazy {
-  op(intent.extras?.getParcelable<Parcelable>(key))
-}
-
 
 //// FRAGMENT HELPERS /////
 /** Start activity from support fragment with given extras */
@@ -68,19 +63,9 @@ inline fun <reified T : Any?> android.support.v4.app.Fragment.lazyArg(key: Strin
   arguments?.get(key) as T
 }
 
-/** Lazy initialize with intent extra [key], using [op] to convert parcelable to resulting type */
-inline fun <reified T : Any?> android.support.v4.app.Fragment.lazyArg(key: String, crossinline op: (Parcelable?) -> T) = lazy {
-  op(arguments?.getParcelable<Parcelable>(key))
-}
-
 /** Lazy initialize with intent extra [key] */
 inline fun <reified T : Any?> android.app.Fragment.lazyArg(key: String) = lazy {
   arguments?.get(key) as T
-}
-
-/** Lazy initialize with intent extra [key], using [op] to convert parcelable to resulting type */
-inline fun <reified T : Any?> android.app.Fragment.lazyArg(key: String, crossinline op: (Parcelable?) -> T) = lazy {
-  op(arguments?.getParcelable<Parcelable>(key))
 }
 
 /** Create bundle from [extras] */

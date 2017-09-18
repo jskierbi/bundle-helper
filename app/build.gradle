@@ -1,5 +1,5 @@
 buildscript {
-  ext.kotlin_version = '1.0.1-2'
+  ext.kotlin_version = '1.1.4-3'
   repositories {
     mavenCentral()
   }
@@ -9,10 +9,11 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.3"
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
 
   defaultConfig {
     applicationId "com.jskierbi.bundle_helper_sample"
@@ -38,8 +39,9 @@ dependencies {
   compile 'com.android.support:appcompat-v7:23.3.0'
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  compile 'org.parceler:parceler-api:1.1.2'
-  kapt 'org.parceler:parceler:1.1.2'
+  compile 'nz.bradcampbell:paperparcel:2.0.4'
+  compile 'nz.bradcampbell:paperparcel-kotlin:2.0.4' // Optional
+  kapt 'nz.bradcampbell:paperparcel-compiler:2.0.4'
 
   compile project(':bundle-helper')
 }

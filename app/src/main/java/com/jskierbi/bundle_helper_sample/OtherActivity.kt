@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.jskierbi.bundle_helper.lazyExtra
-import com.jskierbi.bundle_helper.unwrap
 
 /**
  * Created by q on 04/05/16.
@@ -22,10 +21,10 @@ class OtherActivity : AppCompatActivity() {
   val extraString by lazyExtra<String>(EXTRA_STRING)
   val extraFloat by lazyExtra<Float>(EXTRA_FLOAT)
   val extraBoolean by lazyExtra<Boolean>(EXTRA_BOOLEAN)
-  val extraComplex by lazyExtra<ComplexObj>(EXTRA_COMPLEX_PARAMETER) { it.unwrap() }
+  val extraComplex by lazyExtra<ComplexObj>(EXTRA_COMPLEX_PARAMETER)
 
   val extraOptional by lazyExtra<String?>(EXTRA_OPTIONAL) // Optional by nullable type
-  val extraComplexOptional by lazyExtra<ComplexObj?>(EXTRA_OPTIONAL) { it.unwrap() } // Complex optional by nullable type
+  val extraComplexOptional by lazyExtra<ComplexObj?>(EXTRA_OPTIONAL) // Complex optional by nullable type
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
