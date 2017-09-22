@@ -1,6 +1,6 @@
 
 # Android Bundle Extras Kotlin Wrapper
-[ ![Download](https://api.bintray.com/packages/jskierbi/maven/bundle-helper/images/download.svg) ](https://bintray.com/jskierbi/maven/bundle-helper/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/jskierbi/maven/bundle-helper/images/download.svg) ](https://bintray.com/jskierbi/maven/bundle-helper/_latestVersion)[![Build Status](https://travis-ci.org/jskierbi/bundle-helper.svg?branch=dependencies_update)](https://travis-ci.org/jskierbi/bundle-helper)
 
 Convenient Kotlin extension functions for handling Bundle extras in Activities and arguments in Fragments.
 
@@ -13,7 +13,7 @@ Convenient Kotlin extension functions for handling Bundle extras in Activities a
 ## Installation (build.gradle)
 ```gradle
 dependencies {
-  compile "com.jskierbi:bundle-helpers:0.9.0"
+  compile "com.jskierbi:bundle-helpers:0.9.1"
   
   // bundle-helper requires kotln-stdlib
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -49,7 +49,7 @@ startActivity<MyActivity>(
 
 ### Lazy initialization of args
 ```kotlin
-class FragmentWithArgs : Fragment() {
+class CustomFragment : Fragment() {
 
   val argString by lazyArg<String>(ARG_STRING)
   val argOptional by lazyArg<String?>(ARG_OPTIONAL)
@@ -60,14 +60,8 @@ class FragmentWithArgs : Fragment() {
 
 ### Creating fragment with args
 ```kotlin
-// Creates fragment with passed map as arguments
-createFragment<FragmentWithArgs>(
-    ARG_STRING to "string argument value",
-    ARG_LONG to 1000L
-)
-
-// support.v4 Fragment verion
-createSupportFragment<FragmentWithArgs>(
+// Attach arguments to Fragment
+CustomFragment().withArgs(
     ARG_STRING to "string argument value",
     ARG_LONG to 1000L
 )
@@ -84,40 +78,8 @@ val extraOptional by lazyExtra<String?>(EXTRA_OPTIONAL) // Optional by nullable 
 val extraOptional by lazyArg<String?>(EXTRA_OPTIONAL) // Optional by nullable type
 ```
 
-## Parecler integration
-In its basic form this library supports only simple types, as supported by Android's Bundle class putXXX methods. However, complex objects are supported through [parceler library](https://github.com/johncarl81/parceler). Additional dependency is required:
-```gradle
-  compile "org.parceler:parceler-api:$parcelerVersion"
-  kapt "org.parceler:parceler:$parcelerVersion"
-```
-
-### Passing complex objects as extras/args
-There is ```wrapParcel()``` extension function, underneath it calls Parcels.wrap()
-```kotlin
-val complexObj = createSomeComplexObjext()
-startActivity<OtherActivity>(
-    EXTRA_BOOLEAN to true
-    EXTRA_COMPLEX_PARAMETER to complexObj.wrapParcel()
-)
-```
-```kotlin
-val complexObj = creatSomeComplexObject()
-createSupportFragment<FragmentWithArgs>(
-    ARG_STRING to "string argument value",
-    ARG_COMPLEX to complexObj.wrapParcel()
-)
-```
-
-### Lazy initialization complex objects from Parcelable
-Both ```lazyExtra()``` and ```lazyArg()``` funcitons optinally accept function, that takes Parcelable as input and returns unwrapped instance. ```.unwrap()``` is elegant way of calling Parcels.unwrap()
-```kotlin
-// Activity
-val extraComplex by lazyExtra<ComplexObj>(EXTRA_COMPLEX_PARAMETER) { it.unwrap() }
-```
-```kotlin
-// Fragment
-val extraComplex by lazyArg<ComplexObj>(EXTRA_COMPLEX_PARAMETER) { it.unwrap() }
-```
+## Complex objects support
+To put a copmplex object into bundle, it needs to implement Parcelable interface. It can be done either manually [link](https://developer.android.com/reference/android/os/Parcelable.html) or using library such as [Paper Parcel](https://github.com/grandstaish/paperparcel)
 
 License
 --------
