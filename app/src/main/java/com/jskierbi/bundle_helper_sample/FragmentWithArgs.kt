@@ -17,11 +17,13 @@ class FragmentWithArgs : Fragment() {
     val ARG_STRING = "ARG_STRING"
     val ARG_OPTIONAL = "ARG_OPTIONAL"
     val ARG_COMPLEX = "ARG_COMPLEX"
+    val ARG_NULL = "ARG_NULL"
   }
 
   val argString by  lazyArg<String>(ARG_STRING)
   val argOptional by lazyArg<String?>(ARG_OPTIONAL)
   val argComplex by lazyArg<ComplexObj>(ARG_COMPLEX)
+  val argNull by lazyArg<String?>(ARG_NULL)
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val view = inflater?.inflate(R.layout.fragment_with_arg, container, false)

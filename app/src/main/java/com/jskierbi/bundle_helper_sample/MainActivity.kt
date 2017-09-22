@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.jskierbi.bundle_helper.createSupportFragment
 import com.jskierbi.bundle_helper.startActivity
+import com.jskierbi.bundle_helper.withArgs
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,9 +25,10 @@ class MainActivity : AppCompatActivity() {
     if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {
       supportFragmentManager
           .beginTransaction()
-          .add(R.id.fragment_container, createSupportFragment<FragmentWithArgs>(
+          .add(R.id.fragment_container, FragmentWithArgs().withArgs(
               FragmentWithArgs.ARG_STRING to "Oh, hello there Fragment!",
-              FragmentWithArgs.ARG_COMPLEX to ComplexObj("complex obj", false)
+              FragmentWithArgs.ARG_COMPLEX to ComplexObj("complex obj", false),
+              FragmentWithArgs.ARG_NULL to null
           ))
           .commit()
     }
