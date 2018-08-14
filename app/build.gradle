@@ -13,7 +13,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  buildToolsVersion '27.0.3'
 
   defaultConfig {
     applicationId "com.jskierbi.bundle_helper_sample"
@@ -34,14 +34,14 @@ android {
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
   testCompile 'junit:junit:4.12'
-  compile 'com.android.support:appcompat-v7:23.3.0'
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation 'com.android.support:appcompat-v7:25.4.0'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  compile 'nz.bradcampbell:paperparcel:2.0.4'
-  compile 'nz.bradcampbell:paperparcel-kotlin:2.0.4' // Optional
+  implementation 'nz.bradcampbell:paperparcel:2.0.4'
+  implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.4' // Optional
   kapt 'nz.bradcampbell:paperparcel-compiler:2.0.4'
 
-  compile project(':bundle-helper')
+  implementation project(':bundle-helper')
 }
