@@ -13,10 +13,10 @@ Convenient Kotlin extension functions for handling Bundle extras in Activities a
 ## Installation (build.gradle)
 ```gradle
 dependencies {
-  compile "com.jskierbi:bundle-helpers:0.9.1"
+  implementation "com.jskierbi:bundle-helper:0.9.1"
   
   // bundle-helper requires kotln-stdlib
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   ...
 }
 ```
