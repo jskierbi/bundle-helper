@@ -1,7 +1,8 @@
 package com.jskierbi.bundle_helper_sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.jskierbi.bundle_helper.createSupportFragment
 import com.jskierbi.bundle_helper.startActivity
 import com.jskierbi.bundle_helper.withArgs
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    findViewById(R.id.btn_start_other)?.setOnClickListener {
+    findViewById<View>(R.id.btn_start_other)?.setOnClickListener {
       startActivity<OtherActivity>(
           OtherActivity.EXTRA_BOOLEAN to true,
           OtherActivity.EXTRA_STRING to "Oh, hello world!",

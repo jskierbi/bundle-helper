@@ -1,5 +1,5 @@
 buildscript {
-  ext.kotlin_version = '1.1.4-3'
+  ext.kotlin_version = '1.6.21'
   repositories {
     mavenCentral()
   }
@@ -12,13 +12,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  compileSdkVersion 32
 
   defaultConfig {
     applicationId "com.jskierbi.bundle_helper_sample"
     minSdkVersion 15
-    targetSdkVersion 23
+    targetSdkVersion 32
     versionCode 1
     versionName "1.0"
   }
@@ -34,14 +33,14 @@ android {
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  testCompile 'junit:junit:4.12'
-  compile 'com.android.support:appcompat-v7:23.3.0'
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  testImplementation 'junit:junit:4.12'
+  implementation 'androidx.appcompat:appcompat:1.4.1'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  compile 'nz.bradcampbell:paperparcel:2.0.4'
-  compile 'nz.bradcampbell:paperparcel-kotlin:2.0.4' // Optional
+  implementation 'nz.bradcampbell:paperparcel:2.0.4'
+  implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.4' // Optional
   kapt 'nz.bradcampbell:paperparcel-compiler:2.0.4'
 
-  compile project(':bundle-helper')
+  implementation project(':bundle-helper')
 }
