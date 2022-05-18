@@ -10,10 +10,22 @@ Convenient Kotlin extension functions for handling Bundle extras in Activities a
 * Lazy initialization of Activity fields with intent extras
 * Lazy initialization of Fragment fields with arguments
 
+## Installation (repositories)
+Add it in your root build.gradle at the end of repositories:
+```gradle
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+
 ## Installation (build.gradle)
 ```gradle
 dependencies {
-  implementation "com.jskierbi:bundle-helper:0.9.1"
+   implementation 'com.github.maciekczwa:bundle-helper:Tag'
   
   // bundle-helper requires kotln-stdlib
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
